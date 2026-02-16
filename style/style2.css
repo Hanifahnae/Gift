@@ -1,0 +1,216 @@
+body {
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+.foto {
+    display: block;
+    max-width: 75%;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+}
+
+p {
+    font-family: Poppins;
+    font-size: 13px;
+    text-align: center;
+    position: absolute;
+    top: 45%;
+    margin: 4px;
+}
+h1 {
+    text-align: center;
+    font-size: 20px;
+    font-family: Poppins;
+    font-weight: 700;
+    position: absolute;
+    top: 15%;
+}
+
+h2 {
+    font-family: Poppins;
+    text-align: center;
+    font-weight: 500;
+    position: absolute;
+    top: 80%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+img {
+    display: block;
+    max-width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.book-wrapper {
+    position: relative;
+}
+
+
+
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #ffffff, #cfe8ff);
+    font-family: Georgia, serif;
+}
+
+/* WRAPPER (yang dimiringkan) */
+.book-wrapper {
+    font-family: Poppins;
+    position: relative;
+    width: 420px;
+    height: 500px;
+    perspective: 2000px;
+    transform-origin: left center; /* poros di spine */
+    transition: transform 0.8s ease;
+}
+
+/* miring setelah buka */
+.book-wrapper.opened {
+    transform: rotateZ(-6deg) rotateY(-10deg);
+}
+
+/* SPINE ikut miring karena di dalam wrapper */
+.spine {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 18px;
+    background: linear-gradient(to right, #6ba8ff, #4a78d1);
+    border-radius: 10px 0 0 10px;
+    box-shadow: inset -4px 0 8px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+
+/* BOOK */
+.book {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 18px;
+    right: 0;
+    transform-style: preserve-3d;
+}
+
+/* PAGE */
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-origin: left;
+    transform-style: preserve-3d;
+    transition: transform 1s ease;
+    cursor: pointer;
+}
+
+/* flip */
+.page.flipped {
+    transform: rotateY(-180deg);
+}
+
+.front,
+.back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.back {
+    transform: rotateY(180deg);
+}
+
+/* ===================== */
+/* RESPONSIVE */
+/* ===================== */
+
+@media (max-width: 600px) {
+
+.book-wrapper {
+    width: 280px;
+    height: 380px;
+}
+
+.spine {
+    width: 14px;
+}
+
+.book {
+    left: 14px;
+}
+
+.front,
+.back {
+    padding: 20px;
+    font-size: 0.9rem;
+}
+}
+
+.hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.heart {
+    position: absolute;
+    top: -20px;
+    background: rgba(105, 178, 255);
+    transform: rotate(45deg);
+    animation: fall linear forwards;
+
+    filter: blur(1.5px);
+    box-shadow: 0 0 10px rgba(105, 243, 255);
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -50%;
+    left: 0;
+}
+
+.heart::after {
+    left: -50%;
+    top: 0;
+}
+
+@keyframes fall {
+    to {
+    transform: translateY(100vh) rotate(45deg);
+    opacity: 0;
+    }
+}
